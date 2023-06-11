@@ -65,6 +65,7 @@ jobs:
             export OldBucketID=$(cat ~/textfile.txt)
             echo "${OldBucketId}"
             aws s3 rm "s3://${OldBucketID}" --recursive
+            aws s3api delete-bucket --bucket ${OldBucketId}
 
 workflows:
   create_deploy_fe:
