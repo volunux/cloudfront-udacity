@@ -14,6 +14,7 @@ jobs:
             --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7} \
             --parameter-overrides MyBucketName="mybucket-${CIRCLE_WORKFLOW_ID:0:7}"
       - run: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete
+
 # Fetch and save the pipeline ID (bucket ID) responsible for the last release.
   get_last_deployment_id:
     docker:
@@ -62,6 +63,7 @@ jobs:
           # Similarly, you can create and use $OldStackID environment variable in place of production-distro 
           command: |
             export OldBucketID=$(cat ~/textfile.txt)
+            echo "${OldBucketId}"
             aws s3 rm "s3://${OldBucketID}" --recursive
 
 workflows:
